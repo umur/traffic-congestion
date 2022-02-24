@@ -32,5 +32,8 @@ public class Graph {
         }
     }
 
+    public void printDfsPreOrder(){
+
+    }
 
 }
