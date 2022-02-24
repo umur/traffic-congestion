@@ -16,4 +16,27 @@ public class Edge {
         this.weight = weight;
     }
 
+    public Node getSource() {
+        return source;
+    }
+
+    public void setSource(Node source) {
+        this.source = source;
+    }
+
+    public Node getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Node destination) {
+        this.destination = destination;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
 }
