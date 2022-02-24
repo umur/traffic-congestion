@@ -12,4 +12,11 @@ public class Graph {
         adjList = new HashMap<Node, List<Node>>();
     }
 
+    public void addEdge(Edge edge){
+
+    }
+
+    public void addNode(Node source, Node destination){
+
+    }
 }
