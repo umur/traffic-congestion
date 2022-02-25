@@ -1,4 +1,4 @@
-package main.java.datastructures;
+package congestion.datastructures;
 
 public class Edge {
 

@@ -1,4 +1,4 @@
-package main.java.datastructures;
+package congestion.datastructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;

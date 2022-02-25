@@ -1,4 +1,4 @@
-package main.java.datastructures;
+package congestion.datastructures;
 
 import main.java.model.CongestionEnum;
 

@@ -1,6 +1,4 @@
-package main.java.datastructures;
-
-import main.java.model.CongestionEnum;
+package congestion.datastructures;
 
 import java.util.ArrayList;
 import java.util.List;
