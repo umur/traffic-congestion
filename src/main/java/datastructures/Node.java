@@ -1,48 +1,33 @@
 package main.java.datastructures;
 
+import main.java.model.CongestionEnum;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
 
-    private int numberOfLights;
-
-    private int greenDuration;
-    private int redDuration;
-
-    private String name;
-
+    private NodeData nodeData;
     private List<Edge> edges;
 
-    public int getNumberOfLights() {
-        return numberOfLights;
+
+    public Node(){
+        this.edges = new ArrayList<>();
     }
 
-    public void setNumberOfLights(int numberOfLights) {
-        this.numberOfLights = numberOfLights;
+    @Override
+    public String toString() {
+        return "Node{" +
+                "name='" + nodeData.getName() + '\'' +
+                '}';
     }
 
-    public int getGreenDuration() {
-        return greenDuration;
+    public NodeData getNodeData() {
+        return nodeData;
     }
 
-    public void setGreenDuration(int greenDuration) {
-        this.greenDuration = greenDuration;
-    }
-
-    public int getRedDuration() {
-        return redDuration;
-    }
-
-    public void setRedDuration(int redDuration) {
-        this.redDuration = redDuration;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setNodeData(NodeData nodeData) {
+        this.nodeData = nodeData;
     }
 
     public List<Edge> getEdges() {

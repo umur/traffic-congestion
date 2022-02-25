@@ -8,32 +8,49 @@ import java.util.Map;
 public class Graph {
 
     private Map<Node, List<Node>> adjMap;
+    private int size = 0;
 
     public Graph() {
         adjMap = new HashMap<Node, List<Node>>();
     }
 
 
-    /**
-     * Add the edge to the graph.
-     * Source of edge must exist in the graph.
-     * @param e Edge
-     */
-    public void addNode(Edge e) {
-        Node source = e.getSource();
-        if (!adjMap.containsKey(source)) {
-            System.err.println("Source does not exist !!! : " + e);
+    public void add(String srcName, NodeData nodeData, int weight) {
+        Node srcNode = adjMap.keySet().stream().filter(key ->
+                        key.getNodeData()
+                                .getName()
+                                .equals(srcName))
+                .findFirst()
+                .orElse(null);
+        if (srcNode == null) {
+            System.err.println("Source does not exist !!! : " + srcNode);
         } else {
-            if (adjMap.get(source) == null) {
-                var adj = adjMap.get(source);
-                adj = new ArrayList<>();
-            }
-            adjMap.get(source).add(e.getDestination());
+            Node destNode = new Node();
+            destNode.setNodeData(nodeData);
+            destNode.setEdges(new ArrayList<>());
+            Edge e = new Edge(srcNode, destNode, weight);
+            srcNode.getEdges().add(e);
+            adjMap.putIfAbsent(destNode, new ArrayList<>());
+        }
+
+    }
+
+
+    public void printPreOrder(Node root) {
+        if (root.getEdges().size() == 0) {
+            return;
+        }
+        for (int i = 0; i < root.getEdges().size(); i++) {
+            System.out.println(root.getEdges().get(i));
+            printPreOrder(root.getEdges().get(i).getDestination());
         }
     }
 
-    public void printDfsPreOrder(){
-
+    public Map<Node, List<Node>> getAdjMap() {
+        return adjMap;
     }
 
+    public void setAdjMap(Map<Node, List<Node>> adjMap) {
+        this.adjMap = adjMap;
+    }
 }

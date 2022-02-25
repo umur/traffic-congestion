@@ -10,6 +10,14 @@ public class Edge {
 
     }
 
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "source=" + source +
+                ", destination=" + destination +
+                '}';
+    }
+
     public Edge(Node source, Node destination, float weight) {
         this.source = source;
         this.destination = destination;
