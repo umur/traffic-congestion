@@ -8,7 +8,6 @@ import java.util.Map;
 public class Graph {
 
     private Map<Node, List<Node>> adjMap;
-    private int size = 0;
 
     public Graph() {
         adjMap = new HashMap<Node, List<Node>>();
