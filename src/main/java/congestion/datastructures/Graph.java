@@ -13,8 +13,13 @@ public class Graph {
         adjMap = new HashMap<Node, List<Node>>();
     }
 
-
-    public void add(String srcName, NodeData nodeData, int weight) {
+    /**
+     * Creates a new node and connects it to the node specified with srcName.
+     * @param srcName
+     * @param nodeData
+     * @param weight
+     */
+    public void addNode(String srcName, NodeData nodeData, int weight) {
         Node srcNode = adjMap.keySet().stream().filter(key ->
                         key.getNodeData()
                                 .getName()
@@ -22,16 +27,13 @@ public class Graph {
                 .findFirst()
                 .orElse(null);
         if (srcNode == null) {
-            System.err.println("Source does not exist !!! : " + srcNode);
+            System.err.println("Source does not exist !!! : ");
         } else {
-            Node destNode = new Node();
-            destNode.setNodeData(nodeData);
-            destNode.setEdges(new ArrayList<>());
+            Node destNode = new Node(nodeData, new ArrayList<>());
             Edge e = new Edge(srcNode, destNode, weight);
             srcNode.getEdges().add(e);
             adjMap.putIfAbsent(destNode, new ArrayList<>());
         }
-
     }
 
     /**
@@ -39,18 +41,17 @@ public class Graph {
      * @param root Could be any node
      */
     public void printPreOrder(Node root) {
-        if (root.getEdges().size() == 0) {
-            return;
-        }
-        for (int i = 0; i < root.getEdges().size(); i++) {
-            System.out.println(root.getEdges().get(i));
-            printPreOrder(root.getEdges().get(i).getDestination());
+        if (root.getEdges().size() == 0) return;
+
+        for (Edge e: root.getEdges()) {
+            System.out.println(e);
+            printPreOrder(e.getDestination());
         }
     }
 
     /**
      *
-     * @param root Could be any root
+     * @param root Could be any node
      */
     public void searchBfs(Node root){
 
@@ -60,7 +61,4 @@ public class Graph {
         return adjMap;
     }
 
-    public void setAdjMap(Map<Node, List<Node>> adjMap) {
-        this.adjMap = adjMap;
-    }
 }

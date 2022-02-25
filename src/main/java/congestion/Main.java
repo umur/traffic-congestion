@@ -23,22 +23,22 @@ public class Main {
         // B A->B
         NodeData b= new NodeData();
         b.setName("B");
-        g.add("A",b,1);
+        g.addNode("A",b,1);
 
         // C A->C
         NodeData c= new NodeData();
         c.setName("C");
-        g.add("A",c,1);
+        g.addNode("A",c,1);
 
         // D C->D
         NodeData d= new NodeData();
         d.setName("D");
-        g.add("C",d,1);
+        g.addNode("C",d,1);
 
         // E C->E
         NodeData e= new NodeData();
         e.setName("E");
-        g.add("C",e,1);
+        g.addNode("C",e,1);
 
 
         g.printPreOrder(a);
