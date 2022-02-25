@@ -35,7 +35,10 @@ public class Graph {
 
     }
 
-
+    /**
+     *  Traverse the graph in pre-order
+     * @param root Could be any node
+     */
     public void printPreOrder(Node root) {
         if (root.getEdges().size() == 0) {
             return;
@@ -44,6 +47,14 @@ public class Graph {
             System.out.println(root.getEdges().get(i));
             printPreOrder(root.getEdges().get(i).getDestination());
         }
+    }
+
+    /**
+     *
+     * @param root Could be any root
+     */
+    public void searchBfs(Node root){
+
     }
 
     public Map<Node, List<Node>> getAdjMap() {
