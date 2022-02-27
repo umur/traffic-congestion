@@ -3,6 +3,7 @@ package congestion.datastructures;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import main.java.model.CongestionEnum;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +13,19 @@ public class Edge {
     private Node source;
     private Node destination;
     private float weight;
+
+    private int greenDuration;
+    private int redDuration;
+    private main.java.model.CongestionEnum congestion;
+
+    public Edge(Node source, Node destination, float weight){
+        greenDuration= 10;
+        redDuration=10;
+        congestion = CongestionEnum.GREEN;
+        this.source=source;
+        this.destination=destination;
+        this.weight=weight;
+    }
 
     @Override
     public String toString() {

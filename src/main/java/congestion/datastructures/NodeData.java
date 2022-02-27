@@ -10,13 +10,6 @@ import main.java.model.CongestionEnum;
 @NoArgsConstructor
 public class NodeData {
 
-    private int numberOfLights;
-
-    private int greenDuration;
-    private int redDuration;
-
     private String name;
-    private CongestionEnum congestion;
-
 
 }
