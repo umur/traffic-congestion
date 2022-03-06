@@ -115,9 +115,9 @@ public class Graph {
      */
     public void printPreOrder(Node node) {
         if (node.getEdges().size() == 0) return;
-//        if (node.isVisited()) {
-//            return;
-//        }
+        if (node.isVisited()) {
+            return;
+        }
 
         for (Edge e : node.getEdges()) {
             node.setVisited(true);
