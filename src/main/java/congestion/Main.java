@@ -1,5 +1,6 @@
 package congestion;
 
+import congestion.datastructures.Edge;
 import congestion.datastructures.Graph;
 import congestion.datastructures.Node;
 import congestion.datastructures.NodeData;
@@ -48,10 +49,10 @@ public class Main {
         g.addNode("C", e, 1, 10, 10, null);
 
 
-        g.printPreOrder(a);
+//        g.printPreOrder(a);
 
-//        Edge res = g.searchDfs(a, CongestionEnum.GREEN, -5);
-//        System.out.println(res);
+        Edge res = g.searchDfs(a, CongestionEnum.GREEN, -5);
+        System.out.println(res);
 
     }
 }

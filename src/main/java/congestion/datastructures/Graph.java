@@ -26,7 +26,7 @@ public class Graph {
         var b = adjMap.get(destination);
         if (adjMap.get(source) != null && adjMap.get(destination) != null) {
             adjMap.get(source).add(destination);
-            Edge e = new Edge(source,destination,0);
+            Edge e = new Edge(source, destination, 0);
             source.getEdges().add(e);
         }
     }
@@ -88,14 +88,11 @@ public class Graph {
         if (node.getEdges().size() == 0) return null;
 
         if (node.isVisited()) {
-            return null;
+            return result;
         }
 
         for (int i = 0; i < node.getEdges().size(); i++) {
             Edge e = node.getEdges().get(i);
-//            if(e.getSource().isVisited()){
-//                continue;
-//            }
             e.getSource().setVisited(true);
 
             if (e.getCongestion().equals(congestion) &&
@@ -103,6 +100,7 @@ public class Graph {
                 return e;
             }
             result = searchDfs(e.getDestination(), congestion, weight);
+            return result;
         }
         return result;
     }
@@ -121,8 +119,8 @@ public class Graph {
 
         for (Edge e : node.getEdges()) {
             node.setVisited(true);
-             System.out.println(e);
-           // System.out.println("+++++   " + adjMap);
+            System.out.println(e);
+            // System.out.println("+++++   " + adjMap);
             printPreOrder(e.getDestination());
         }
     }

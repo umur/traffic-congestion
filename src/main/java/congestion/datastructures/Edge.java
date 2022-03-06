@@ -21,7 +21,7 @@ public class Edge {
     public Edge(Node source, Node destination, float weight){
         greenDuration= 10;
         redDuration=10;
-        congestion = CongestionEnum.GREEN;
+        congestion = CongestionEnum.RED;
         this.source=source;
         this.destination=destination;
         this.weight=weight;
