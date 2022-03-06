@@ -39,8 +39,8 @@ public class Main {
         NodeData gg = new NodeData();
         gg.setName("G");
         g.addNode("D", gg, 10, 10, 10, null);
-        g.addEdge(g.getNodeByName("G"),g.getNodeByName("B"));
-        g.addEdge(g.getNodeByName("D"),g.getNodeByName("G"));
+        g.addEdge(g.getNodeByName("G"),g.getNodeByName("B"),0,0,0,CongestionEnum.GREEN);
+        g.addEdge(g.getNodeByName("B"),g.getNodeByName("C"),0,0,0,CongestionEnum.GREEN);
 
         // E C->E
         NodeData e = new NodeData();

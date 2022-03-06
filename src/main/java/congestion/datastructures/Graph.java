@@ -15,18 +15,28 @@ public class Graph {
         adjMap = new HashMap<Node, List<Node>>();
     }
 
-    public void addEdge(Node source, Node destination) {
+    public void addEdge(Node source,
+                        Node destination,
+                        float weight,
+                        int greenDuration,
+                        int redDuration,
+                        CongestionEnum congestion) {
+
+        var a = adjMap.get(source);
+        var b = adjMap.get(destination);
         if (adjMap.get(source) != null && adjMap.get(destination) != null) {
             adjMap.get(source).add(destination);
+            Edge e = new Edge(source,destination,0);
+            source.getEdges().add(e);
         }
     }
 
     public Node getNodeByName(String name) {
-      return adjMap.keySet()
-               .stream()
-               .filter(l->l.getNodeData().getName().equals(name))
-               .findFirst()
-               .orElse(null);
+        return adjMap.keySet()
+                .stream()
+                .filter(l -> l.getNodeData().getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -36,8 +46,8 @@ public class Graph {
      * @param nodeData
      * @param weight
      */
-    public void addNode(String srcName,
-                        NodeData nodeData,
+    public void addNode(String srcName, // a
+                        NodeData nodeData, // b
                         int weight,
                         int greenDuration,
                         int redDuration,
@@ -46,19 +56,22 @@ public class Graph {
         if (congestion == null) {
             congestion = CongestionEnum.RED;
         }
-//
-        Node srcNode = adjMap.keySet().stream().filter(key ->
-                        key.getNodeData()
-                                .getName()
-                                .equals(srcName))
-                .findFirst()
-                .orElse(null);
+
+        Node srcNode = null;
+        for (Node n : adjMap.keySet()) {
+            if (n.getNodeData().getName().equals(srcName)) {
+                srcNode = n;
+                break;
+            }
+        }
+
         if (srcNode == null) {
             System.err.println("Source does not exist !!! : ");
         } else {
             Node destNode = new Node(nodeData, new ArrayList<>());
             Edge e = new Edge(srcNode, destNode, weight, greenDuration, redDuration, congestion);
             srcNode.getEdges().add(e);
+            adjMap.get(srcNode).add(destNode);
             adjMap.putIfAbsent(destNode, new ArrayList<>());
         }
     }
@@ -71,20 +84,27 @@ public class Graph {
     }
 
     public Edge searchDfs(Node node, congestion.model.CongestionEnum congestion, float weight) {
-        Edge temp = null;
+        Edge result = null;
         if (node.getEdges().size() == 0) return null;
+
+        if (node.isVisited()) {
+            return null;
+        }
 
         for (int i = 0; i < node.getEdges().size(); i++) {
             Edge e = node.getEdges().get(i);
+//            if(e.getSource().isVisited()){
+//                continue;
+//            }
+            e.getSource().setVisited(true);
 
             if (e.getCongestion().equals(congestion) &&
                     e.getWeight() > weight) {
                 return e;
             }
-            // return (e!=null) ? e : searchDfs(e.getDestination(), congestion, weight);
-            temp = searchDfs(e.getDestination(), congestion, weight);
+            result = searchDfs(e.getDestination(), congestion, weight);
         }
-        return temp;
+        return result;
     }
 
 
@@ -95,11 +115,20 @@ public class Graph {
      */
     public void printPreOrder(Node node) {
         if (node.getEdges().size() == 0) return;
+//        if (node.isVisited()) {
+//            return;
+//        }
 
         for (Edge e : node.getEdges()) {
-            System.out.println(e);
+            node.setVisited(true);
+             System.out.println(e);
+           // System.out.println("+++++   " + adjMap);
             printPreOrder(e.getDestination());
         }
+    }
+
+    public void dispose() {
+
     }
 
 
