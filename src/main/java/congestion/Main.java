@@ -1,10 +1,9 @@
 package congestion;
 
-import congestion.datastructures.Edge;
 import congestion.datastructures.Graph;
 import congestion.datastructures.Node;
 import congestion.datastructures.NodeData;
-import main.java.model.CongestionEnum;
+import congestion.model.CongestionEnum;
 
 import java.util.ArrayList;
 

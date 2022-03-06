@@ -1,4 +1,4 @@
-package main.java.model;
+package congestion.model;
 
 public enum CongestionEnum {
     RED,

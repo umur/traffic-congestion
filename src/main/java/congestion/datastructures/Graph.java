@@ -1,6 +1,6 @@
 package congestion.datastructures;
 
-import main.java.model.CongestionEnum;
+import congestion.model.CongestionEnum;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,14 +63,14 @@ public class Graph {
         }
     }
 
-    public void adjustDuration(Node node, main.java.model.CongestionEnum congestion, float weight) {
+    public void adjustDuration(Node node, congestion.model.CongestionEnum congestion, float weight) {
         Edge e = searchDfs(node, congestion, weight);
         if (e != null) {
 
         }
     }
 
-    public Edge searchDfs(Node node, main.java.model.CongestionEnum congestion, float weight) {
+    public Edge searchDfs(Node node, congestion.model.CongestionEnum congestion, float weight) {
         Edge temp = null;
         if (node.getEdges().size() == 0) return null;
 
