@@ -2,6 +2,11 @@ package congestion.datastructures;
 
 import congestion.model.CongestionEnum;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.security.PublicKey;
 import java.util.*;
 
 public class Graph {
@@ -12,6 +17,57 @@ public class Graph {
         adjMap = new HashMap<Node, List<Node>>();
     }
 
+    public void generateGraph() throws IOException {
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+
+        BufferedReader reader = new BufferedReader(new FileReader("lights.csv"));
+        String line = reader.readLine();
+        int i=0;
+        while (line != null) {
+            String[] tokens = line.split(",");
+            String name = tokens[0];
+            String source = tokens[1];
+            String destination = tokens[2];
+            int weight = Integer.parseInt(tokens[3]);
+            int green = Integer.parseInt(tokens[4]);
+            int red = Integer.parseInt(tokens[5]);
+            String congestion = tokens[6];
+            CongestionEnum congestionEnum = CongestionEnum.GREEN;
+            if (congestion.equalsIgnoreCase("RED")) {
+                congestionEnum = CongestionEnum.RED;
+            } else if (congestion.equalsIgnoreCase("YELLOW")) {
+                congestionEnum = CongestionEnum.YELLOW;
+            }
+
+            // for the root
+            if(i==0){
+                //source
+                NodeData sourceData = new NodeData(name);
+                Node sourceNode = new Node(sourceData, new ArrayList<>());
+
+                //destination
+                NodeData destData = new NodeData(destination);
+                Node destNode = new Node(destData, new ArrayList<>());
+
+                Edge e = new Edge(sourceNode,destNode,weight);
+
+                sourceNode.getEdges().add(e);
+                List<Node> adjs = new ArrayList<>();
+                adjs.add(destNode);
+                adjMap.put(sourceNode,adjs);
+                adjMap.put(destNode,new ArrayList<>());
+
+                i++;
+            }else{
+                NodeData nodeData = new NodeData(destination);
+                addNode(source,nodeData,weight,green,red,congestionEnum);
+            }
+
+            line = reader.readLine();
+        }
+
+    }
+
     public void addEdge(Node source,
                         Node destination,
                         float weight,
@@ -19,8 +75,6 @@ public class Graph {
                         int redDuration,
                         CongestionEnum congestion) {
 
-        var a = adjMap.get(source);
-        var b = adjMap.get(destination);
         if (adjMap.get(source) != null && adjMap.get(destination) != null) {
             adjMap.get(source).add(destination);
             Edge e = new Edge(source, destination, 0);
