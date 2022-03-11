@@ -49,10 +49,10 @@ public class Main {
         g.addNode("C", e, 1, 10, 10, null);
 
 
-//        g.printPreOrder(a);
+      //  g.printPreOrder(a);
 
-        Edge res = g.searchDfs(a, CongestionEnum.GREEN, -5);
-        System.out.println(res);
+        Edge res = g.search(a, CongestionEnum.GREEN, 10000);
+//        System.out.println(res);
 
     }
 }

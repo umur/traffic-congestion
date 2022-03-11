@@ -2,10 +2,7 @@ package congestion.datastructures;
 
 import congestion.model.CongestionEnum;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
 
@@ -105,6 +102,31 @@ public class Graph {
         return result;
     }
 
+    public Edge searchBfs(Node node, congestion.model.CongestionEnum congestion, float weight) {
+        Edge result = null;
+        if (node.getEdges().size() == 0) return null;
+
+        if (node.isVisited()) {
+            return result;
+        }
+        Queue<Node> children = new ArrayDeque<Node>();
+        children.addAll(adjMap.get(node));
+        for (int i = 0; i < node.getEdges().size(); i++) {
+            Edge e = node.getEdges().get(i);
+            e.getSource().setVisited(true);
+
+            System.out.println(e);
+            if (e.getCongestion().equals(congestion) &&
+                    e.getWeight() > weight) {
+                return e;
+            }
+        }
+        while (!children.isEmpty()) {
+            result = searchBfs(children.remove(), congestion, weight);
+        }
+        return result;
+    }
+
 
     /**
      * Traverse the graph in pre-order
@@ -120,13 +142,8 @@ public class Graph {
         for (Edge e : node.getEdges()) {
             node.setVisited(true);
             System.out.println(e);
-            // System.out.println("+++++   " + adjMap);
             printPreOrder(e.getDestination());
         }
-    }
-
-    public void dispose() {
-
     }
 
 
